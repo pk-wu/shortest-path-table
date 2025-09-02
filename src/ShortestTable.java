@@ -1,5 +1,10 @@
+import java.util.Stack;
+
 public class ShortestTable {
     Node[] shortestTable;
+    Stack<String>[] visitationStack;
+    Stack<String>[] distanceStack;
+
 
     /**
      * constructor initializes the shortest table and fills it with generateTable(),
@@ -19,8 +24,12 @@ public class ShortestTable {
     // constructor for testing, does not independently fill shortestTable via generateTable()
     ShortestTable(int tableLength) {
         this.shortestTable = new Node[tableLength];
+        this.visitationStack = new Stack[tableLength];
+        this.distanceStack = new Stack[tableLength];
         for (int i = 0; i < tableLength; i++) {
             this.shortestTable[i] = new Node(i);
+            this.visitationStack[i] = new Stack<>();
+            this.distanceStack[i] = new Stack<>();
         }
     }
 
@@ -82,18 +91,33 @@ public class ShortestTable {
                 if (shortestTable[i].prev.equals("-")) {
                     // update the prev
                     shortestTable[i].prev = Character.toString((char) row + 65);
-                    ;
+                    visitationStack[i].push(Character.toString((char) row + 65));
+
                     // update the shortest
                     shortestTable[i].shortest = graph[row][i] + shortestTable[row].shortest;
+                    distanceStack[i].push(String.valueOf(graph[row][i] + shortestTable[row].shortest));
                     continue;
                 }
                 // check, if new path (via this row node) is shorter than current path, we overwrite
                 if (graph[row][i] + shortestTable[row].shortest < shortestTable[i].shortest) {
                     // replace the shortestTable's shortest & prev
                     shortestTable[i].prev = Character.toString((char) row + 65);
+                    visitationStack[i].push(Character.toString((char) row + 65));
+
                     shortestTable[i].shortest = graph[row][i] + shortestTable[row].shortest;
+                    distanceStack[i].push(String.valueOf(graph[row][i] + shortestTable[row].shortest));
                 }
             }
+        }
+    }
+
+    /**
+     * method prints every node's updated values (prev, distance) throughout the calculations
+     */
+    public void printIteratively(){
+        int len = this.visitationStack.length;
+        for (int i = 0 ; i < len; i++) {
+            System.out.println(i + " (" + (char)(i+65) +"): " + distanceStack[i] + visitationStack[i]);
         }
     }
 
