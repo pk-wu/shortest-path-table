@@ -4,15 +4,15 @@ public class Driver {
     public static void main(String[] args) {
         // initialize the graph as an adjacency matrix
         // as int[][]
-        int[][] graph = {
-                {0, 1, 3, 0, 0, 10, 0},
-                {1, 0, 1, 7, 5, 0, 2},
-                {3, 1, 0, 9, 3, 0, 0},
-                {0, 7, 9, 0, 2, 0, 0},
-                {0, 5, 3, 2, 0, 2, 0},
-                {10, 0, 0, 1, 2, 0, 0},
-                {0, 2, 0, 12, 0, 0, 0}
-        };
+//        int[][] graph = {
+//                {0, 1, 3, 0, 0, 10, 0},
+//                {1, 0, 1, 7, 5, 0, 2},
+//                {3, 1, 0, 9, 3, 0, 0},
+//                {0, 7, 9, 0, 2, 0, 0},
+//                {0, 5, 3, 2, 0, 2, 0},
+//                {10, 0, 0, 1, 2, 0, 0},
+//                {0, 2, 0, 12, 0, 0, 0}
+//        };
 
 //        int[][] graph = {
 //                {0,4,5,8,0,0,0,0,0,0},
@@ -85,7 +85,7 @@ public class Driver {
         // Input the graph (2D int[][])
         // + start node (char)
         // + end node (char)
-        ShortestTable shortestTable = new ShortestTable(graph,'A','J');
+        ShortestTable shortestTable = new ShortestTable(graph1,'A','E');
         // printIteratively() shows every step (the cancellation thing)
         shortestTable.printIteratively();
     }

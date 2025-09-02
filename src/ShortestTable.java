@@ -137,7 +137,7 @@ public class ShortestTable {
         }
 
         // string of shortest path
-        String shortestPath = "";
+        StringBuilder sPath = new StringBuilder();
         // store cost to be printed later
         int cost = shortestTable[goal - 65].shortest;
         // backtrack from goal to start
@@ -145,16 +145,16 @@ public class ShortestTable {
             // check exit condition - exit once we reach start
             if (shortestTable[goal - 65].prev.equals("start")) {
                 // add the start node to our solution
-                shortestPath += shortestTable[goal - 65].vertex;
+                sPath.append(shortestTable[goal - 65].vertex);
                 break;
             }
             // append the prev of the current node to path
-            shortestPath += goal;
+            sPath.append(goal).append(">-");
 
             // update the current node to the prev
             goal = shortestTable[goal - 65].prev.charAt(0);
         }
-        System.out.println("Shortest Path: " + shortestPath + ", Cost: " + cost);
+        System.out.println("Shortest Path: " + sPath.reverse() + ", Cost: " + cost);
         System.out.println("--------------------------------------------------");
 
     }
